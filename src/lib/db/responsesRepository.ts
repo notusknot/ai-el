@@ -1,4 +1,5 @@
 import { supabase } from "./client";
+import type { RealtimeChannel } from "@supabase/supabase-js";
 import type { RatingInput, ResponseRow, Scenario } from "./types";
 
 export async function listScenarios(): Promise<Scenario[]> {
@@ -56,4 +57,23 @@ export async function submitResponse(input: RatingInput): Promise<void> {
       throw new Error(reasonsError.message);
     }
   }
+}
+
+export function subscribeToResponseInserts(
+  onInsert: (row: ResponseRow) => void
+): RealtimeChannel {
+  return supabase
+    .channel("responses-live")
+    .on(
+      "postgres_changes",
+      {
+        event: "INSERT",
+        schema: "public",
+        table: "responses",
+      },
+      (payload) => {
+        onInsert(payload.new as ResponseRow);
+      }
+    )
+    .subscribe();
 }

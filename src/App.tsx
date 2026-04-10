@@ -6,7 +6,9 @@ import {
   listResponses,
   listScenarios,
   submitResponse,
+  subscribeToResponseInserts,
 } from "./lib/db/responsesRepository";
+import { supabase } from "./lib/db/client";
 import type { RatingInput, ResponseRow, Scenario } from "./lib/db/types";
 import "./styles.css";
 
@@ -38,6 +40,25 @@ export default function App() {
     void loadInitialData();
   }, []);
 
+  useEffect(() => {
+    const channel = subscribeToResponseInserts(async () => {
+      try {
+        const updatedResponses = await listResponses();
+        setResponses(updatedResponses);
+      } catch (error) {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "Failed to refresh live responses.";
+        setErrorMessage(message);
+      }
+    });
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, []);
+
   async function handleSubmitRating(newRating: RatingInput) {
     try {
       await submitResponse(newRating);
@@ -67,23 +88,25 @@ export default function App() {
 
       {errorMessage ? <p>{errorMessage}</p> : null}
 
-      <section className="panel">
-        <h2>Rate scenarios</h2>
-        <div className="scenario-grid">
-          {scenarios.map((scenario) => (
-            <ScenarioCard
-              key={scenario.id}
-              scenario={scenario}
-              onSubmit={handleSubmitRating}
-            />
-          ))}
-        </div>
-      </section>
+      <div className="main-grid">
+        <section className="panel">
+          <h2>Rate scenarios</h2>
+          <div className="scenario-grid">
+            {scenarios.map((scenario) => (
+              <ScenarioCard
+                key={scenario.id}
+                scenario={scenario}
+                onSubmit={handleSubmitRating}
+              />
+            ))}
+          </div>
+        </section>
 
-      <section className="panel">
-        <h2>Live results</h2>
-        <ResultsChart results={results} />
-      </section>
+        <section className="panel results-panel">
+          <h2>Live results</h2>
+          <ResultsChart results={results} />
+        </section>
+      </div>
     </main>
   );
 }
