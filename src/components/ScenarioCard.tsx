@@ -16,7 +16,6 @@ export default function ScenarioCard({ scenario, onSubmit }) {
       learningImpact,
       fairness,
       reasons,
-      createdAt: Date.now()
     });
 
     setLearningImpact(0);
