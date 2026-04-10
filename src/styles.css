@@ -135,6 +135,41 @@ body {
   border-color: #60a5fa;
 }
 
+.status {
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.status.success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status.error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.results-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.results-summary h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.result-card.featured {
+  border-color: #c7d2fe;
+  background: #f8faff;
+}
+
 button[type="submit"] {
   border: none;
   border-radius: 8px;

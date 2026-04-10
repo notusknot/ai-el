@@ -28,4 +28,5 @@ export type ScenarioResult = {
   count: number;
   avgLearningImpact: number;
   avgFairness: number;
+  controversyScore: number;
 };
