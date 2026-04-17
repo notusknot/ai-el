@@ -15,6 +15,7 @@
         typescript
         typescript-language-server
         git
+        tmux
       ];
     };
   };

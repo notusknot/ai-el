@@ -30,19 +30,21 @@ export default function ScenarioCard({ scenario, onSubmit }) {
       <div className="category">{scenario.category}</div>
 
       <form onSubmit={handleSubmit}>
-        <RatingSlider
-          label="Learning impact"
-          hint="Harms learning ← → Helps learning"
-          value={learningImpact}
-          onChange={setLearningImpact}
-        />
+        <div className="slider-row">
+          <RatingSlider
+            label="Learning impact"
+            hint="Harms learning ← → Helps learning"
+            value={learningImpact}
+            onChange={setLearningImpact}
+          />
 
-        <RatingSlider
-          label="Fairness"
-          hint="Unfair ← → Fair"
-          value={fairness}
-          onChange={setFairness}
-        />
+          <RatingSlider
+            label="Fairness"
+            hint="Unfair ← → Fair"
+            value={fairness}
+            onChange={setFairness}
+          />
+        </div>
 
         <TagSelector
           label="Why?"

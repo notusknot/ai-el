@@ -1,4 +1,5 @@
 import type { ScenarioResult } from "../lib/db/types";
+import MoralMap from "./MoralMap";
 
 type ResultsChartProps = {
   results: ScenarioResult[];
@@ -13,6 +14,15 @@ export default function ResultsChart({ results }: ResultsChartProps) {
   return (
     <div className="results-layout">
       <section className="results-summary">
+        <h3>Moral map</h3>
+        <p className="results-explainer">
+          Each point shows one scenario. Left to right is harmful to helpful for
+          learning, and bottom to top is unfair to fair.
+        </p>
+        <MoralMap results={results} />
+      </section>
+
+      <section className="results-summary">
         <h3>Most controversial</h3>
         {controversialResults.length === 0 ? (
           <p>More responses are needed before disagreement patterns appear.</p>
@@ -22,7 +32,7 @@ export default function ResultsChart({ results }: ResultsChartProps) {
               <article key={result.scenarioId} className="result-card featured">
                 <h4>{result.title}</h4>
                 <p>Responses: {result.count}</p>
-                <p>Controversy score (0-5): {result.controversyScore.toFixed(2)}</p>
+                <p>Controversy score: {result.controversyScore.toFixed(2)}</p>
               </article>
             ))}
           </div>
@@ -38,7 +48,7 @@ export default function ResultsChart({ results }: ResultsChartProps) {
               <p>Responses: {result.count}</p>
               <p>Average learning impact: {result.avgLearningImpact.toFixed(2)}</p>
               <p>Average fairness: {result.avgFairness.toFixed(2)}</p>
-              <p>Controversy score (0-5): {result.controversyScore.toFixed(2)}</p>
+              <p>Controversy score: {result.controversyScore.toFixed(2)}</p>
             </article>
           ))}
         </div>

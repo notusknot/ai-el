@@ -56,6 +56,8 @@ body {
 .results-panel {
   position: sticky;
   top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
 }
 
 .scenario-grid,
@@ -64,50 +66,68 @@ body {
   gap: 0.75rem;
 }
 
+.scenario-grid {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
 .card,
 .result-card {
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  padding: 0.85rem;
+  padding: 0.75rem;
 }
 
 .card h3,
 .result-card h3 {
-  margin: 0 0 0.35rem;
-  font-size: 1rem;
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
 }
 
 .card p,
 .result-card p {
-  margin: 0.25rem 0;
-  font-size: 0.95rem;
+  margin: 0.2rem 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.card form {
+  display: grid;
+  gap: 0.4rem;
 }
 
 .category {
   display: inline-block;
-  margin: 0.35rem 0 0.75rem;
-  padding: 0.15rem 0.5rem;
+  margin: 0.25rem 0 0.5rem;
+  padding: 0.12rem 0.4rem;
   border-radius: 999px;
   background: #eef2ff;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .slider-group {
-  display: block;
-  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-.slider-group input {
-  width: 100%;
-  margin-top: 0.25rem;
+.slider-group span {
+  font-size: 0.8rem;
 }
 
 .hint {
-  display: block;
-  font-size: 0.82rem;
+  font-size: 0.7rem;
   color: #6b7280;
-  margin-top: 0.15rem;
-  margin-bottom: 0.2rem;
+}
+
+.slider-group input {
+  margin-top: 0.1rem;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
 }
 
 .tag-selector {
@@ -170,6 +190,73 @@ body {
   background: #f8faff;
 }
 
+.results-explainer {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.moral-map-shell {
+  position: relative;
+  border-radius: 14px;
+  padding: 0.25rem;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(248, 113, 113, 0.18) 0%,
+      rgba(251, 191, 36, 0.12) 35%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(96, 165, 250, 0.12) 70%,
+      rgba(74, 222, 128, 0.18) 100%
+    );
+}
+
+.moral-map-chart {
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(1px);
+}
+
+.quadrant-label {
+  position: absolute;
+  font-size: 0.72rem;
+  color: #6b7280;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.18rem 0.4rem;
+  border-radius: 999px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.quadrant-label.top-left {
+  top: 0.6rem;
+  left: 0.6rem;
+}
+
+.quadrant-label.top-right {
+  top: 0.6rem;
+  right: 0.6rem;
+}
+
+.quadrant-label.bottom-left {
+  bottom: 0.6rem;
+  left: 0.6rem;
+}
+
+.quadrant-label.bottom-right {
+  bottom: 0.6rem;
+  right: 0.6rem;
+}
+
 button[type="submit"] {
   border: none;
   border-radius: 8px;
@@ -200,4 +287,9 @@ button[type="submit"] {
   .hero h1 {
     font-size: 1.6rem;
   }
+
+  .slider-row {
+    grid-template-columns: 1fr;
+  }
+
 }

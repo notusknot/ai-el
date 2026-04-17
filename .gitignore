@@ -16,6 +16,7 @@ dist-ssr
 .envrc
 .env.local
 flake.nix
+flake.lock
 
 # Editor directories and files
 .vscode/*

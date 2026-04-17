@@ -1,7 +1,9 @@
 export default function RatingSlider({ label, hint, value, onChange }) {
   return (
     <label className="slider-group">
-      <span>{label}: <strong>{value}</strong></span>
+      <span className="slider-label">
+        {label}: <strong>{value}</strong>
+      </span>
       <span className="hint">{hint}</span>
       <input
         type="range"
