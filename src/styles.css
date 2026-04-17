@@ -60,6 +60,11 @@ body {
   overflow-y: auto;
 }
 
+.result-card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
 .scenario-grid,
 .results-list {
   display: grid;
